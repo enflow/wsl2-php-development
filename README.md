@@ -36,7 +36,9 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 # nginx
 Nginx needs to be configured. This depends on how you want to setup your vhosts. 
 We've included our '/etc/nginx' folder (excluding the SSL certificates) in this repository as reference.
-You can copy this directory to your /etc/nginx folder. The easist is running `cd /etc/nginx && explorer.exe .` and copy the files from that folder over.
+You can copy this directory to your /etc/nginx folder:
+- Run `cd /etc/nginx && explorer.exe .` and copy the files from that folder over.
+- You need to symlink the /etc/nginx/code folder to your code folder. We recommend this is under `~/code`
 
 # MySQL
 We just need to set the root password to 'secret'. The other default configuration is fine for your usecase:
@@ -78,7 +80,8 @@ Run `composer global update` to install those global dependencies.
 - Install mkcert `/home/linuxbrew/.linuxbrew/bin/mkcert -install`
 - Create certificate. We ran the following, but depends on your subdomains/nginx configuration etc.
 `mkcert '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
-- Move generated certificate and key to `/etc/dev-ssl/cert.pem` & '/etc/dev-ssl/key.pem'
+- Move generated certificate and key to `/etc/dev-ssl/cert.pem` & `/etc/dev-ssl/key.pem`
+- To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl
 
 # Terminal
 We use Windows Terminal for a nice Terminal interface around WSL2. You can find that here:   
@@ -106,8 +109,12 @@ Editing your host file for every foundation is pretty annoying. The recommended 
 127.0.0.1 *.foundation.test
 127.0.0.1 *.enflow.test
 127.0.0.1 *.client.test
+127.0.0.1 *.concept.test
 127.0.0.1 *.private.test
 ```
-- Edit your network device (LAN & WiFi if applicable) to use the `127.0.0.1` as primary DNS server and `1.1.1.1` as secondary DNS server as fallback. More info about this can be found here: https://mayakron.altervista.org/support/acrylic/Windows10Configuration.htm
+- Edit your network device (LAN & WiFi if applicable) to use the `127.0.0.1` as primary DNS server and `1.1.1.1` as secondary DNS server as fallback for IPv4. For IPv6 use `::1` as primary and `2606:4700:4700::1111` as secondary.
+More info about this can be found here: https://mayakron.altervista.org/support/acrylic/Windows10Configuration.htm
 
+# Editing code
+We recommend that the `~/code` folder is used on your WSL machine. Then you can access those files via `\\wsl$\Ubuntu\home\USERNAME\code`, where USERNAME would be your username configured (most likely your firstname in lowercase)
 
