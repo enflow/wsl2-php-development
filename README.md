@@ -40,6 +40,14 @@ You can copy this directory to your /etc/nginx folder:
 - Run `cd /etc/nginx && explorer.exe .` and copy the files from that folder over.
 - You need to symlink the /etc/nginx/code folder to your code folder. We recommend this is under `~/code`
 
+# php-fpm
+We have some config items to change in the www PHP FPM pool:
+`sudo nano /etc/php/7.4/fpm/pool.d/www.conf`
+- `user` should be set to your username. Most likely your first name in lowercase.
+- `group` should be set to your username. Most likely your first name in lowercase.
+- `listen` should be set to `127.0.0.1:9150`
+- You can save those changes.
+
 # MySQL
 We just need to set the root password to 'secret'. The other default configuration is fine for your usecase:
 - `sudo mysql`
@@ -82,6 +90,21 @@ Run `composer global update` to install those global dependencies.
 `mkcert '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
 - Move generated certificate and key to `/etc/dev-ssl/cert.pem` & `/etc/dev-ssl/key.pem`
 - To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl
+
+# Starting up
+We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
+
+```
+sudo mkdir -p /var/run/php
+sudo service nginx restart
+sudo service php7.4-fpm restart
+sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
+sudo service mysql start
+sudo service redis-server start
+sudo service memcached start
+```
+
+For Enflow users: we've included our `~/.bash_aliases` file in this repository for copying.
 
 # Terminal
 We use Windows Terminal for a nice Terminal interface around WSL2. You can find that here:   
