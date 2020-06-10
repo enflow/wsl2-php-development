@@ -141,3 +141,5 @@ More info about this can be found here: https://mayakron.altervista.org/support/
 # Editing code
 We recommend that the `~/code` folder is used on your WSL machine. Then you can access those files via `\\wsl$\Ubuntu\home\USERNAME\code`, where USERNAME would be your username configured (most likely your firstname in lowercase)
 
+# Reference
+- https://github.com/valeryan/valet-wsl/wiki/Installation-Guide
