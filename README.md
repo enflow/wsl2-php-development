@@ -28,7 +28,7 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- `apt install -y apt-transport-https php7.4-fpm php7.4-mbstring php7.4-curl php7.4-json php7.4-bz2 php7.4-zip php7.4-xml php7.4-gd php7.4-mysql php7.4-intl php7.4-sqlite3 php7.4-soap php7.4-bcmath php7.4-memcached php7.4-redis nginx nodejs rlwrap git dos2unix memcached mysql-client default-jre htop yarn unzip dh-autoreconf beanstalkd mysql-server redis-server`
+- `apt install -y apt-transport-https php7.4-fpm php7.4-mbstring php7.4-curl php7.4-json php7.4-bz2 php7.4-zip php7.4-xml php7.4-gd php7.4-mysql php7.4-intl php7.4-sqlite3 php7.4-soap php7.4-bcmath php7.4-memcached php7.4-redis nginx nodejs rlwrap git dos2unix memcached mysql-client default-jre htop yarn unzip dh-autoreconf beanstalkd mysql-server redis-server chromium-browser`
 - `sudo npm install gulp-cli -g`
 - `touch ~/.hushlogin`
 - Copy your private key to the `~/.ssh/` directory
