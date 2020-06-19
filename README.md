@@ -45,7 +45,7 @@ We have some config items to change in the www PHP FPM pool:
 `sudo nano /etc/php/7.4/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
-- `listen` should be set to `127.0.0.1:9150`
+- `listen` should be set to `127.0.0.1:9250`
 - You can save those changes.
 
 # MySQL
