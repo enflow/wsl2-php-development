@@ -33,6 +33,7 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `sudo npm install gulp-cli -g`
 - `touch ~/.hushlogin`
 - Copy your private key to the `~/.ssh/` directory
+- `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
 
 # nginx
 Nginx needs to be configured. This depends on how you want to setup your vhosts. 
