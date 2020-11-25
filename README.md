@@ -36,13 +36,11 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
 
 # chromium
-We use chromium with the puppeteer integration to create PDFs etc from webpages. Chromium requires snap to be installed, but that doesn't work out of the box (see https://github.com/microsoft/WSL/issues/5126):
+We use chromium with the puppeteer integration to create PDFs etc from webpages and running Laravel Dusk tests.
 
-- sudo apt-get update && sudo apt-get install -yqq daemonize dbus-user-session fontconfig
-- sudo daemonize /usr/bin/unshare --fork --pid --mount-proc /lib/systemd/systemd --system-unit=basic.target
-- exec sudo nsenter -t $(pidof systemd) -a su - $LOGNAME
-- sudo apt update && sudo apt install chromium-browser
-- sudo snap install chromium-browser
+- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+- sudo apt install ./google-chrome-stable_current_amd64.deb
+- verify using `google-chrome --version`
 
 # nginx
 Nginx needs to be configured. This depends on how you want to setup your vhosts. 
