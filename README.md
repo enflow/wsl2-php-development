@@ -22,24 +22,24 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 
 - `sudo su`
 - `passwd --delete USERNAME`
+- `touch ~/.hushlogin`
 - `add-apt-repository ppa:ondrej/php`
-- `curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -`
+- `curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -`
 - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
 - Install PHP/webserver/database: `apt install -y apt-transport-https php7.4-fpm php7.4-mbstring php7.4-curl php7.4-json php7.4-bz2 php7.4-zip php7.4-xml php7.4-gd php7.4-mysql php7.4-intl php7.4-sqlite3 php7.4-soap php7.4-bcmath php7.4-memcached php7.4-redis nginx mysql-client mysql-server`
-- Optional dependencies: `nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf beanstalkd redis-server pv ack unoconv`
+- Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
-- `touch ~/.hushlogin`
-- Copy your private key to the `~/.ssh/` directory
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
+- Copy your private key to the `~/.ssh/` directory
 
 # chromium
 We use chromium with the puppeteer integration to create PDFs etc from webpages and running Laravel Dusk tests.
 
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo apt install ./google-chrome-stable_current_amd64.deb
+- `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
+- `sudo apt install -y ./google-chrome-stable_current_amd64.deb`
 - verify using `google-chrome --version`
 
 # nginx
@@ -59,6 +59,8 @@ We have some config items to change in the www PHP FPM pool:
 
 # MySQL
 We just need to set the root password to 'secret'. The other default configuration is fine for your usecase:
+- `sudo usermod -d /var/lib/mysql/ mysql`
+- `sudo service mysql start`
 - `sudo mysql`
 - Setting the root password to 'secret' for easy use:
 - `use mysql;
