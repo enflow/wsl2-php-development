@@ -98,9 +98,10 @@ Run `composer global update` to install those global dependencies.
 - Install https://github.com/FiloSottile/mkcert (`/home/linuxbrew/.linuxbrew/bin/brew install mkcert`)
 - Install mkcert `/home/linuxbrew/.linuxbrew/bin/mkcert -install`
 - Create certificate. We ran the following, but depends on your subdomains/nginx configuration etc.
-`mkcert '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
+`/home/linuxbrew/.linuxbrew/bin/mkcert '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
 - Move generated certificate and key to `/etc/dev-ssl/cert.pem` & `/etc/dev-ssl/key.pem`
-- To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl
+- To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl`
+- Install the root certificates on your local machine. To find these, go to `cd /home/USERNAME/.local/share/mkcert`. Install the `rootCA.pem` via Chrome's certificate installer.
 
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
