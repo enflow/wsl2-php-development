@@ -6,11 +6,8 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 ## Installing WSL2
 
 - Open Powershell as administrator
-- `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-- `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
-- You need to restart your Windows machine (required).
-- Open Powershell as administrator once again
-- `wsl --set-default-version 2`
+- Run: `wsl --set-default-version 2`
+- Run: `wsl --install -d Ubuntu`
 - Install Ubuntu from the Microsoft store and launch Ubunto from start
 - WSL will install automatically. Please wait till the username prompt.
 - Enter your username. We prefer to use our firstname in lowercase format: i.e. John Doe -> username 'john'
@@ -23,24 +20,17 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `sudo su`
 - `passwd --delete USERNAME`
 - `touch ~/.hushlogin`
-- `add-apt-repository ppa:ondrej/php`
+- `sudo add-apt-repository ppa:ondrej/php`
 - `curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -`
 - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y apt-transport-https php7.4-fpm php7.4-mbstring php7.4-curl php7.4-json php7.4-bz2 php7.4-zip php7.4-xml php7.4-gd php7.4-mysql php7.4-intl php7.4-sqlite3 php7.4-soap php7.4-bcmath php7.4-memcached php7.4-redis nginx mysql-client mysql-server`
+- Install PHP/webserver/database: `apt install -y apt-transport-https php8.0-fpm php8.0-mbstring php8.0-curl php8.0-json php8.0-bz2 php8.0-zip php8.0-xml php8.0-gd php8.0-mysql php8.0-intl php8.0-sqlite3 php8.0-soap php8.0-bcmath php8.0-memcached php8.0-redis nginx mysql-client mysql-server`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
 - Copy your private key to the `~/.ssh/` directory
-
-# chromium
-We use chromium with the puppeteer integration to create PDFs etc from webpages and running Laravel Dusk tests.
-
-- `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
-- `sudo apt install -y ./google-chrome-stable_current_amd64.deb`
-- verify using `google-chrome --version`
 
 # nginx
 Nginx needs to be configured. This depends on how you want to setup your vhosts. 
@@ -92,7 +82,14 @@ Paste the following composer.json file to `~/.composer/composer.json`. You may c
 ```
 
 Run `composer global update` to install those global dependencies.
-    
+
+# chromium (optional)
+We use chromium with the puppeteer integration to create PDFs etc from webpages and running Laravel Dusk tests.
+
+- `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
+- `sudo apt install -y ./google-chrome-stable_current_amd64.deb`
+- verify using `google-chrome --version`
+
 # SSL certificates
 - Install https://brew.sh/ (`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`)
 - Install https://github.com/FiloSottile/mkcert (`/home/linuxbrew/.linuxbrew/bin/brew install mkcert`)
@@ -139,7 +136,7 @@ Editing your host file for every foundation is pretty annoying. The recommended 
   - Set `LocalIPv4BindingAddress` to `127.0.0.1`
   - Save the changes (Ctrl+S)
 - Go to File -> Open Acrylic Configuration
-- Paste the following at the end of the file:
+- Paste the following at the end of the file (these subdomains are specific to Enflow's use-case, modify where needed):
 ```
 127.0.0.1 *.foundation.test
 127.0.0.1 *.enflow.test
