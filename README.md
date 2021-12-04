@@ -26,7 +26,7 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y apt-transport-https php8.0-fpm php8.0-mbstring php8.0-curl php8.0-json php8.0-bz2 php8.0-zip php8.0-xml php8.0-gd php8.0-mysql php8.0-intl php8.0-sqlite3 php8.0-soap php8.0-bcmath php8.0-memcached php8.0-redis nginx mysql-client mysql-server`
+- Install PHP/webserver/database: `apt install -y php8.1-fpm php8.1-mbstring php8.1-curl php8.1-bz2 php8.1-zip php8.1-xml php8.1-gd php8.1-mysql php8.1-intl php8.1-sqlite3 php8.1-soap php8.1-bcmath php8.1-memcached php8.1-redis apt-transport-https nginx mysql-client mysql-server`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
@@ -41,7 +41,7 @@ You can copy this directory to your /etc/nginx folder:
 
 # php-fpm
 We have some config items to change in the www PHP FPM pool:
-`sudo nano /etc/php/7.4/fpm/pool.d/www.conf`
+`sudo nano /etc/php/8.1/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
 - `listen` should be set to `127.0.0.1:9250`
@@ -75,7 +75,7 @@ Paste the following composer.json file to `~/.composer/composer.json`. You may c
         }
     ],
     "require": {
-        "laravel/installer": "~1.1",
+        "laravel/installer": "^4.2",
         "enflow/crane": "dev-master"
     }
 }
@@ -106,7 +106,7 @@ We've defined a `restart` function in our `~/.bash_aliases` file to help startin
 ```
 sudo mkdir -p /var/run/php
 sudo service nginx restart
-sudo service php7.4-fpm restart
+sudo service php8.1-fpm restart
 sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
 sudo service mysql start
 sudo service redis-server start
