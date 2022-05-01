@@ -93,7 +93,7 @@ resetdb() {
 		echo "No DB supplied"
 		return
 	fi
-	mysql -h127.0.0.1 --user="homestead" --password="secret" --execute="DROP DATABASE $1; CREATE DATABASE $1;"
+	mysql -h127.0.0.1 --user="root" --password="secret" --execute="DROP DATABASE $1; CREATE DATABASE $1;"
 }
 
 towerlink() {
@@ -129,8 +129,8 @@ flavorlink() {
 
 restart() {
     sudo mkdir -p /var/run/php
-	sudo service nginx restart
-    sudo service php7.4-fpm restart
+    sudo service nginx restart
+    sudo service php8.1-fpm restart
     sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
     sudo service mysql start
     sudo service redis-server start
@@ -146,16 +146,6 @@ function dusk() {
  
      php artisan dusk "$@"
  }
-
-function puppetagent() {
-    eval $(ssh-agent -s)
-    ssh-add "/home/michel/.ssh/puppet_id_rsa"
-}
-
-function enflowagent() {
-    eval $(ssh-agent -s)
-    ssh-add "/home/michel/.ssh/enflow_id_rsa"
-}
 
 gulp() {
     if [ -f "webpack.mix.js" ]; then
