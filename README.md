@@ -26,7 +26,7 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y php8.2-fpm php8.2-mbstring php8.2-curl php8.2-bz2 php8.2-zip php8.2-xml php8.2-gd php8.2-mysql php8.2-intl php8.2-sqlite3 php8.2-soap php8.2-bcmath php8.2-memcached php8.2-redis php8.2-xmlrpc apt-transport-https nginx mysql-client mysql-server`
+- Install PHP/webserver/database: `apt install -y php8.2-fpm php8.2-mbstring php8.2-curl php8.2-bz2 php8.2-zip php8.2-xml php8.2-gd php8.2-mysql php8.2-intl php8.2-sqlite3 php8.2-soap php8.2-bcmath php8.2-memcached php8.2-redis php8.2-xmlrpc php8.2-imagick apt-transport-https nginx mysql-client mysql-server`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
