@@ -41,7 +41,7 @@ You can copy this directory to your /etc/nginx folder:
 
 # php-fpm
 We have some config items to change in the www PHP FPM pool:
-`sudo nano /etc/php/8.1/fpm/pool.d/www.conf`
+`sudo nano /etc/php/8.2/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
 - `listen` should be set to `127.0.0.1:9250`
@@ -95,7 +95,7 @@ We use chromium with the puppeteer integration to create PDFs etc from webpages 
 - Install https://github.com/FiloSottile/mkcert (`/home/linuxbrew/.linuxbrew/bin/brew install mkcert`)
 - Install mkcert `/home/linuxbrew/.linuxbrew/bin/mkcert -install`
 - Create certificate. We ran the following, but depends on your subdomains/nginx configuration etc.
-`/home/linuxbrew/.linuxbrew/bin/mkcert '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
+`/home/linuxbrew/.linuxbrew/bin/mkcert -ecdsa '*.enflow.test' '*.client.test' '*.crewplanner.client.test' '*.concept.test' '*.foundation.test' '*.private.test'`
 - Move generated certificate and key to `/etc/dev-ssl/cert.pem` & `/etc/dev-ssl/key.pem`
 - To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl`
 - Install the root certificates on your local machine. To find these, go to `cd /home/USERNAME/.local/share/mkcert`. Install the `rootCA.pem` via Chrome's certificate installer.
@@ -106,7 +106,7 @@ We've defined a `restart` function in our `~/.bash_aliases` file to help startin
 ```
 sudo mkdir -p /var/run/php
 sudo service nginx restart
-sudo service php8.1-fpm restart
+sudo service php8.2-fpm restart
 sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
 sudo service mysql start
 sudo service redis-server start
