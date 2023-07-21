@@ -6,8 +6,14 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 ## Installing WSL2
 
 - Open Powershell as administrator
-- Run: `wsl --set-default-version 2`
-- Run: `wsl --install -d Ubuntu`
+- Run:
+```
+wsl --install
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --set-default-version 2
+wsl --install -d Ubuntu
+```
 - Install Ubuntu from the Microsoft store and launch Ubunto from start
 - WSL will install automatically. Please wait till the username prompt.
 - Enter your username. We prefer to use our firstname in lowercase format: i.e. John Doe -> username 'john'
@@ -135,7 +141,7 @@ Editing your host file for every foundation is pretty annoying. The recommended 
   - Set `PrimaryServerAddress` to `1.1.1.1`
   - Set `LocalIPv4BindingAddress` to `127.0.0.1`
   - Save the changes (Ctrl+S)
-- Go to File -> Open Acrylic Configuration
+- Go to File -> Open Acrylic Hosts
 - Paste the following at the end of the file (these subdomains are specific to Enflow's use-case, modify where needed):
 ```
 127.0.0.1 *.foundation.test
