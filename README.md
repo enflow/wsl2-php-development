@@ -106,6 +106,14 @@ We use chromium with the puppeteer integration to create PDFs etc from webpages 
 - To install these for nginx, run `sudo ln -s /etc/dev-ssl /etc/nginx/ssl`
 - Install the root certificates on your local machine. To find these, go to `cd /home/USERNAME/.local/share/mkcert`. Install the `rootCA.pem` via Chrome's certificate installer.
 
+# SSH Agent
+For specific sync or SSH actions, an SSH agent is required. It's recommended to integrate this with 1Password and have your SSH keys defined there.
+The following tutorial helps with setting up an auto-starting agent: https://gist.github.com/WillianTomaz/a972f544cc201d3fbc8cd1f6aeccef51
+Notes:
+- Place `npiperelay.exe` in `C:\Users\XXXXX\npiperelay`. Don't forget to add this to the Windows path
+- Restarting the terminal via `wsl --shutdown` or restarting the PC (closing Terminal won't do the trick)
+- Add the `source $HOME/.agent-bridge.sh` to the `.zshrc`
+
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
 
