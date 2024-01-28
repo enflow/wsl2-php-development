@@ -32,7 +32,7 @@ wsl --install -d Ubuntu
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y php8.2-fpm php8.2-mbstring php8.2-curl php8.2-bz2 php8.2-zip php8.2-xml php8.2-gd php8.2-mysql php8.2-intl php8.2-sqlite3 php8.2-soap php8.2-bcmath php8.2-memcached php8.2-redis php8.2-xmlrpc php8.2-imagick apt-transport-https nginx mysql-client mysql-server`
+- Install PHP/webserver/database: `apt install -y php8.3-fpm php8.3-mbstring php8.3-curl php8.3-bz2 php8.3-zip php8.3-xml php8.3-gd php8.3-mysql php8.3-intl php8.3-sqlite3 php8.3-soap php8.3-bcmath php8.3-memcached php8.3-redis php8.3-xmlrpc php8.3-imagick apt-transport-https nginx mysql-client mysql-server`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
@@ -47,7 +47,7 @@ You can copy this directory to your /etc/nginx folder:
 
 # php-fpm
 We have some config items to change in the www PHP FPM pool:
-`sudo nano /etc/php/8.2/fpm/pool.d/www.conf`
+`sudo nano /etc/php/8.3/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
 - `listen` should be set to `127.0.0.1:9250`
@@ -120,7 +120,7 @@ We've defined a `restart` function in our `~/.bash_aliases` file to help startin
 ```
 sudo mkdir -p /var/run/php
 sudo service nginx restart
-sudo service php8.2-fpm restart
+sudo service php8.3-fpm restart
 sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
 sudo service mysql start
 sudo service redis-server start
