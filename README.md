@@ -32,7 +32,7 @@ wsl --install -d Ubuntu
 - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y php8.3-fpm php8.3-mbstring php8.3-curl php8.3-bz2 php8.3-zip php8.3-xml php8.3-gd php8.3-mysql php8.3-intl php8.3-sqlite3 php8.3-soap php8.3-bcmath php8.3-memcached php8.3-redis php8.3-xmlrpc php8.3-imagick apt-transport-https nginx mysql-client mysql-server`
+- Install PHP/webserver/database: `apt install -y php8.4-fpm php8.4-mbstring php8.4-curl php8.4-bz2 php8.4-zip php8.4-xml php8.4-gd php8.4-mysql php8.4-intl php8.4-sqlite3 php8.4-soap php8.4-bcmath php8.4-memcached php8.4-redis php8.4-xmlrpc php8.4-imagick apt-transport-https nginx mysql-client mysql-server`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
 - `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
