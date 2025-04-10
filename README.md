@@ -47,7 +47,7 @@ You can copy this directory to your /etc/nginx folder:
 
 # php-fpm
 We have some config items to change in the www PHP FPM pool:
-`sudo nano /etc/php/8.3/fpm/pool.d/www.conf`
+`sudo nano /etc/php/8.4/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
 - `listen` should be set to `127.0.0.1:9250`
