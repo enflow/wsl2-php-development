@@ -120,7 +120,7 @@ We've defined a `restart` function in our `~/.bash_aliases` file to help startin
 ```
 sudo mkdir -p /var/run/php
 sudo service nginx restart
-sudo service php8.3-fpm restart
+sudo service php8.4-fpm restart
 sudo mkdir /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld
 sudo service mysql start
 sudo service redis-server start
