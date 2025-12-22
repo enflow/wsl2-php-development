@@ -25,7 +25,7 @@ wsl --install -d Ubuntu
 - `passwd --delete USERNAME`
 - `apt update`
 - `apt upgrade -y`
-- Install nginx and MariaDB: `apt install -y apt-transport-https nginx mysql-client mysql-server`
+- Install nginx and MariaDB: `apt install -y apt-transport-https nginx mariadb-server`
 - Install PHP 8.4: `apt install -y php8.4-fpm php8.4-mbstring php8.4-curl php8.4-bz2 php8.4-zip php8.4-xml php8.4-gd php8.4-mysql php8.4-intl php8.4-sqlite3 php8.4-soap php8.4-bcmath php8.4-memcached php8.4-redis php8.4-xmlrpc php8.4-imagick`
 - Install PHP 8.5: `apt install -y php8.5-fpm php8.5-mbstring php8.5-curl php8.5-bz2 php8.5-zip php8.5-xml php8.5-gd php8.5-mysql php8.5-intl php8.5-sqlite3 php8.5-soap php8.5-bcmath php8.5-memcached php8.5-redis php8.5-xmlrpc php8.5-imagick`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
@@ -58,15 +58,9 @@ We have some config items to change in the www PHP FPM pool. If you installed mu
 - `listen` should be set to `127.0.0.1:9250`
 - You can save those changes.
 
-# MySQL
+# MariaDB
 We just need to set the root password to 'secret'. The other default configuration is fine for your usecase:
-- `sudo service mysql start`
-- `sudo mysql`
-- Setting the root password to 'secret' for easy use:
-- `use mysql;
-    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret';
-    flush privileges;
-    quit`
+- `sudo mysql_secure_installation`
     
 # Composer
 Install Composer: https://getcomposer.org/download/
