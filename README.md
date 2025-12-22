@@ -9,9 +9,6 @@ You may install this on a Windows 10 machine with build 1904 or later (May 2020 
 - Run:
 ```
 wsl --install
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-wsl --set-default-version 2
 wsl --install -d Ubuntu
 ```
 - Install Ubuntu from the Microsoft store and launch Ubunto from start
@@ -23,20 +20,28 @@ wsl --install -d Ubuntu
 
 # Installing dependencies
 
+- `touch ~/.hushlogin`
 - `sudo su`
 - `passwd --delete USERNAME`
-- `touch ~/.hushlogin`
-- `sudo add-apt-repository ppa:ondrej/php`
-- `curl -sL https://deb.nodesource.com/setup_18.x | sudo bash -`
-- `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
-- `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
 - `apt update`
 - `apt upgrade -y`
-- Install PHP/webserver/database: `apt install -y php8.4-fpm php8.4-mbstring php8.4-curl php8.4-bz2 php8.4-zip php8.4-xml php8.4-gd php8.4-mysql php8.4-intl php8.4-sqlite3 php8.4-soap php8.4-bcmath php8.4-memcached php8.4-redis php8.4-xmlrpc php8.4-imagick apt-transport-https nginx mysql-client mysql-server`
+- Install nginx and MariaDB: `apt install -y apt-transport-https nginx mysql-client mysql-server`
+- Install PHP 8.4: `apt install -y php8.4-fpm php8.4-mbstring php8.4-curl php8.4-bz2 php8.4-zip php8.4-xml php8.4-gd php8.4-mysql php8.4-intl php8.4-sqlite3 php8.4-soap php8.4-bcmath php8.4-memcached php8.4-redis php8.4-xmlrpc php8.4-imagick`
+- Install PHP 8.5: `apt install -y php8.5-fpm php8.5-mbstring php8.5-curl php8.5-bz2 php8.5-zip php8.5-xml php8.5-gd php8.5-mysql php8.5-intl php8.5-sqlite3 php8.5-soap php8.5-bcmath php8.5-memcached php8.5-redis php8.5-xmlrpc php8.5-imagick`
 - Optional dependencies: `apt install -y nodejs rlwrap git dos2unix memcached default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv`
-- `sudo npm install gulp-cli -g`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
 - Copy your private key to the `~/.ssh/` directory
+
+# NodeJS
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+\. "$HOME/.nvm/nvm.sh"
+nvm install 24
+node -v # Should print "v24.12.0".
+corepack enable yarn
+yarn -v
+yarn global add gulp-cli
+```
 
 # nginx
 Nginx needs to be configured. This depends on how you want to setup your vhosts. 
@@ -46,8 +51,8 @@ You can copy this directory to your /etc/nginx folder:
 - You need to symlink the /etc/nginx/code folder to your code folder. We recommend this is under `~/code`
 
 # php-fpm
-We have some config items to change in the www PHP FPM pool:
-`sudo nano /etc/php/8.4/fpm/pool.d/www.conf`
+We have some config items to change in the www PHP FPM pool. If you installed multiple PHP versions, you must change this for all versions.
+`sudo nano /etc/php/8.5/fpm/pool.d/www.conf`
 - `user` should be set to your username. Most likely your first name in lowercase.
 - `group` should be set to your username. Most likely your first name in lowercase.
 - `listen` should be set to `127.0.0.1:9250`
@@ -55,7 +60,6 @@ We have some config items to change in the www PHP FPM pool:
 
 # MySQL
 We just need to set the root password to 'secret'. The other default configuration is fine for your usecase:
-- `sudo usermod -d /var/lib/mysql/ mysql`
 - `sudo service mysql start`
 - `sudo mysql`
 - Setting the root password to 'secret' for easy use:
@@ -69,7 +73,7 @@ Install Composer: https://getcomposer.org/download/
 
 Move to global directory: `sudo mv composer.phar /usr/local/bin/composer`
 
-Paste the following composer.json file to `~/.composer/composer.json`. You may change this to handle your usecases.
+Paste the following composer.json file to `~/.config/composer/composer.json`. You may change this to handle your usecases.
 ```
 {
     "minimum-stability": "dev",
@@ -81,7 +85,6 @@ Paste the following composer.json file to `~/.composer/composer.json`. You may c
         }
     ],
     "require": {
-        "laravel/installer": "^4.2",
         "enflow/crane": "dev-master"
     }
 }
@@ -90,14 +93,14 @@ Paste the following composer.json file to `~/.composer/composer.json`. You may c
 Run `composer global update` to install those global dependencies.
 
 # chromium (optional)
-We use chromium with the puppeteer integration to create PDFs etc from webpages and running Laravel Dusk tests.
+We use chromium with the puppeteer integration to create PDFs etc from webpages.
 
 - `wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb`
 - `sudo apt install -y ./google-chrome-stable_current_amd64.deb`
 - verify using `google-chrome --version`
 
 # SSL certificates
-- Install https://brew.sh/ (`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`)
+- Install https://brew.sh/: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"`
 - Install https://github.com/FiloSottile/mkcert (`/home/linuxbrew/.linuxbrew/bin/brew install mkcert`)
 - Install mkcert `/home/linuxbrew/.linuxbrew/bin/mkcert -install`
 - Create certificate. We ran the following, but depends on your subdomains/nginx configuration etc.
@@ -108,11 +111,7 @@ We use chromium with the puppeteer integration to create PDFs etc from webpages 
 
 # SSH Agent
 For specific sync or SSH actions, an SSH agent is required. It's recommended to integrate this with 1Password and have your SSH keys defined there.
-The following tutorial helps with setting up an auto-starting agent: https://gist.github.com/WillianTomaz/a972f544cc201d3fbc8cd1f6aeccef51
-Notes:
-- Place `npiperelay.exe` in `C:\Users\XXXXX\npiperelay`. Don't forget to add this to the Windows path
-- Restarting the terminal via `wsl --shutdown` or restarting the PC (closing Terminal won't do the trick)
-- Add the `source $HOME/.agent-bridge.sh` to the `.zshrc`
+The following tutorial helps with setting up an auto-starting agent: https://developer.1password.com/docs/ssh/integrations/wsl
 
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
