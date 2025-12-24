@@ -106,6 +106,7 @@ We use chromium with the puppeteer integration to create PDFs etc from webpages.
 # SSH Agent
 For specific sync or SSH actions, an SSH agent is required. It's recommended to integrate this with 1Password and have your SSH keys defined there.
 The following tutorial helps with setting up an auto-starting agent: https://developer.1password.com/docs/ssh/integrations/wsl
+To allow ssh key forwarding for PuTTY, install https://github.com/ndbeals/winssh-pageant. This acts as a bridge between the 1Password SSH agent and Windows.
 
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
