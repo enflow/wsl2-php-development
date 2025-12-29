@@ -28,7 +28,7 @@ wsl --install -d Ubuntu
 - Install nginx and MariaDB: `apt install -y apt-transport-https nginx mariadb-server`
 - Install PHP 8.4: `apt install -y php8.4-fpm php8.4-mbstring php8.4-curl php8.4-bz2 php8.4-zip php8.4-xml php8.4-gd php8.4-mysql php8.4-intl php8.4-sqlite3 php8.4-soap php8.4-bcmath php8.4-memcached php8.4-redis php8.4-xmlrpc php8.4-imagick`
 - Install PHP 8.5: `apt install -y php8.5-fpm php8.5-mbstring php8.5-curl php8.5-bz2 php8.5-zip php8.5-xml php8.5-gd php8.5-mysql php8.5-intl php8.5-sqlite3 php8.5-soap php8.5-bcmath php8.5-memcached php8.5-redis php8.5-xmlrpc php8.5-imagick`
-- Optional dependencies: `apt install -y rlwrap git dos2unix default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv git-delta dnsutils`
+- Optional dependencies: `apt install -y rlwrap git dos2unix default-jre htop yarn unzip dh-autoreconf redis-server pv ack unoconv git-delta dnsutils plocate`
 - `locale-gen nl_NL && locale-gen nl_NL.UTF-8 && locale-gen --purge`
 - Copy your private key to the `~/.ssh/` directory
 
