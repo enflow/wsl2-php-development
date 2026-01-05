@@ -108,6 +108,24 @@ For specific sync or SSH actions, an SSH agent is required. It's recommended to 
 The following tutorial helps with setting up an auto-starting agent: https://developer.1password.com/docs/ssh/integrations/wsl
 To allow ssh key forwarding for PuTTY, install https://github.com/ndbeals/winssh-pageant. This acts as a bridge between the 1Password SSH agent and Windows.
 
+# Clickhouse
+```
+# Download the ClickHouse GPG key and store it in the keyring
+curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | sudo gpg --dearmor -o /usr/share/keyrings/clickhouse-keyring.gpg
+
+# Get the system architecture
+ARCH=$(dpkg --print-architecture)
+
+# Add the ClickHouse repository to apt sources
+echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch=${ARCH}] https://packages.clickhouse.com/deb stable main" | sudo tee /etc/apt/sources.list.d/clickhouse.list
+
+# Update apt package lists
+sudo apt-get update
+
+# Install the client
+sudo apt-get install -y clickhouse-client
+```
+
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
 
