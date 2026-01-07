@@ -126,6 +126,14 @@ sudo apt-get update
 sudo apt-get install -y clickhouse-client
 ```
 
+# golang
+Using `g` to manage golang version is best-practice:
+```
+curl -sSL https://git.io/g-install | sh
+
+go version
+```
+
 # Starting up
 We've defined a `restart` function in our `~/.bash_aliases` file to help starting up. When your machine is started up, you need to run `restart` as the first commando to start all services up. This function should look something like:
 
