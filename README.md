@@ -34,10 +34,10 @@ wsl --install -d Ubuntu
 
 # NodeJS
 ```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 \. "$HOME/.nvm/nvm.sh"
 nvm install 24
-node -v # Should print "v24.12.0".
+node -v
 corepack enable yarn
 yarn -v
 yarn global add gulp-cli
